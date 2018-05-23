@@ -19,9 +19,11 @@
 
 <h2>New Comment</h2>
 <%= form_for @comment do |f| %>
-<%= f.hidden_field :post_id, value: @post.id %>
-<%= f.collection_select :user_id, User.all, :id, :username%>
-<%= f.text_field :content %>
-
-<%= f.submit %>
+	<%= f.hidden_field :post_id, value: @post.id %>
+	<p><%= f.collection_select :user_id, User.all, :id, :username, prompt: true%></p>
+	<p><%= f.label "Comment Content:" %> <%= f.text_field :content %></p>
+	<%= f.fields_for :user, @comment.build_user do |u| %>
+		<p><%= u.label "New Username" %><%= u.text_field :username %></p>
+	<% end %>
+	<%= f.submit %>
 <% end %>
