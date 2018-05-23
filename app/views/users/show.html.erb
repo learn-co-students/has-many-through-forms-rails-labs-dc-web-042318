@@ -1,1 +1,7 @@
-
+<h1>Username: <%= @user.username %></h1>
+<div>Email: <%= @user.email %></div>
+<br>
+<h2>Posts user has commented on</h2>
+<% @user.posts.each do |post| %>
+  <div><%= link_to post.title, post_path(post) %></div>
+<% end %>
